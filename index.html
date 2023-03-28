@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Name of the app -->
+  <title>Course Info</title>
+
+<body onload="initialize()">
+  <script>
+    function initialize() {
+      if (navigator.onLine) {
+        const xhr = new XMLHttpRequest();
+        const url = "courses.json";
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            var courses = JSON.parse(xhr.response).courses;
+            courses.forEach(addRow);
+          }
+        };
+
+        xhr.open("get", url);
+        xhr.send();
+      }
+    }
+
+    function addRow(course) {
+      // Add code here for part (b)
+      var courselist = document.getElementById("courselist");
+      var row = courselist.insertRow();
+
+      var codeCell = row.insertCell();
+      codeCell.innerHTML = course.code;
+
+      var titleCell = row.insertCell();
+      titleCell.innerHTML = course.title;
+
+      var creditCell = row.insertCell();
+      creditCell.innerHTML = course.credit;
+
+      var categoryCell = row.insertCell();
+      categoryCell.innerHTML = course.category;
+
+      var feeCell = row.insertCell();
+      feeCell.innerHTML = course.credit * 1250;
+    }
+
+  </script>
+
+  <!-- Add code here for part (a) -->
+
+  <table border="1">
+    <caption style="font-size:2em">Course List</caption>
+    <thead>
+      <tr>
+        <th>Course code</th>
+        <th>Course title</th>
+        <th>Credit</th>
+        <th>Category</th>
+        <th>Tuition Fee</th>
+      </tr>
+    </thead>
+    <tbody id="courselist">
+    </tbody>
+  </table>
+
+</body>
+
+</html>
